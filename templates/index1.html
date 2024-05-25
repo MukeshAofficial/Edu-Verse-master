@@ -1,0 +1,127 @@
+```html
+<!DOCTYPE html>
+<html>
+<head>
+  <title>To Do List</title>
+  <style>
+    body {
+      background-color: #f5deb3;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    #container {
+      width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    label {
+      font-weight: bold;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      padding: 5px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      background-color: #52be80;
+      color: #fff;
+      padding: 5px 10px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    ul {
+      list-style-type: none;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    li {
+      background-color: #fff;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    li input[type="checkbox"] {
+      margin-right: 10px;
+    }
+
+    li button {
+      background-color: #f94144;
+      color: #fff;
+      padding: 5px 10px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div id="container">
+    <h1>To Do List</h1>
+    <form id="form">
+      <label for="task">Task:</label>
+      <input type="text" id="task">
+      <button type="submit">Add Task</button>
+    </form>
+    <ul id="list">
+    </ul>
+  </div>
+
+  <script>
+    const form = document.getElementById("form");
+    const list = document.getElementById("list");
+
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+
+      const task = document.getElementById("task").value;
+
+      if (task === "") {
+        alert("Please enter a task");
+        return;
+      }
+
+      const li = document.createElement("li");
+      const checkbox = document.createElement("input");
+      checkbox.type = "checkbox";
+      const label = document.createElement("label");
+      label.innerText = task;
+      const button = document.createElement("button");
+      button.innerText = "Delete";
+
+      li.appendChild(checkbox);
+      li.appendChild(label);
+      li.appendChild(button);
+      list.appendChild(li);
+
+      document.getElementById("task").value = "";
+    });
+
+    list.addEventListener("click", (e) => {
+      if (e.target.tagName === "BUTTON") {
+        e.target.parentElement.remove();
+      } else if (e.target.tagName === "INPUT") {
+        e.target.parentElement.classList.toggle("completed");
+      }
+    });
+  </script>
+</body>
+</html>
+```
